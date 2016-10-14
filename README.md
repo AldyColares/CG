@@ -1,2 +1,2 @@
 # CG
-Trabalho de CH
+Trabalho de CG
