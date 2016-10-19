@@ -8,7 +8,7 @@ GLWidget::GLWidget(QWidget *parent) :
 
 void GLWidget::initializeGL()
 {
-    glClearColor(0.0f,0.0f,0.0f,1.0f);
+    glClearColor(0.53f,0.78f,0.54f,1.0f);
 
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHT0);
