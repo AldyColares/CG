@@ -41,7 +41,7 @@ void GLWidget::initializeGL()
     glMatrixMode(GL_MODELVIEW);
 
 }
-
+// http://www.trentreed.net/blog/qt5-opengl-part-3b-camera-control/
 void GLWidget::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
