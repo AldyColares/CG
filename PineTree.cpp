@@ -36,28 +36,4 @@ void PineTree::draw(){
 
 }
 
-void Piece::setCenter(vertex v)
-{
-    center.x = v.x;
-    center.y = v.y;
-    center.z = v.z;
-}
 
-void Piece::setCenter(float X, float Y, float Z)
-{
-    center.x = X;
-    center.y = Y;
-    center.z = Z;
-}
-
-void Piece::setColor(float R, float G, float B)
-{
-    color[0] = R;
-    color[1] = G;
-    color[2] = B;
-}
-
-void Piece::setSize(float s)
-{
-    size = s;
-}

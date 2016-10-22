@@ -12,6 +12,7 @@ public:
     void initializeGL();
     void paintGL();
     void resize(int w, int h);
+
 private:
     float
         orthoSize,
@@ -29,7 +30,6 @@ private:
     Piece piece;
 
    float Red, Green, Blue;
-   float RBorder, GBorder, BBorder;
 
 };
 
