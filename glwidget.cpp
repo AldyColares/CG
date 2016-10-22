@@ -8,6 +8,8 @@ GLWidget::GLWidget(QWidget *parent) :
 
 void GLWidget::initializeGL()
 {
+    GLfloat intensity = 1;
+    GLfloat distance = orthoSize;
 
 
     GLfloat light_spec[] = {intensity, intensity, intensity, 1.0f};
@@ -33,6 +35,7 @@ void GLWidget::initializeGL()
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
+    //http://stackoverflow.com/questions/2571402/explain-the-usage-of-glortho
 
     glOrtho(-0, 0,  // left, right
             -0, 0,  // bottom, up
@@ -45,6 +48,18 @@ void GLWidget::initializeGL()
 void GLWidget::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
+    // Deixe os comandos abaixo sempre sendo o ultimo!!
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+
+
+    glOrtho(0, 0,  // left, right
+            0, 0,  // bottom, up
+            0, 0); // near, far
+    glMatrixMode(GL_MODELVIEW);
 
 
 }

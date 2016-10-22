@@ -14,12 +14,14 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     glwidget.cpp \
-    tree.cpp
+    PineTree.cpp \
+    cubeScenario.cpp
 
 HEADERS  += mainwindow.h \
     glwidget.h \
-    tree.h \
-    axis.h
+    axis.h \
+    PineTree.h \
+    cubeScenario.h
 
 FORMS    += mainwindow.ui
 
