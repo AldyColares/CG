@@ -2,6 +2,7 @@
 #define GLWIDGET_H
 
 #include <QGLWidget>
+#include "cubeScenario.h"
 
 class GLWidget : public QGLWidget
 {
@@ -13,7 +14,9 @@ public:
     void paintGL();
     void resize(int w, int h);
 
+
 private:
+    void setOrthoSize(int size);
     float
         orthoSize,
         width,
@@ -21,19 +24,16 @@ private:
         angleX,
         angleY,
         zoom;
+        CubeScenerio cubeScenerio;
 
     QPoint position;
 
-    Axis axis;
-    Block orthoBox;
-    ChessTable table;
-    Piece piece;
+
 
    float Red, Green, Blue;
 
 };
 
-};
 
 
 

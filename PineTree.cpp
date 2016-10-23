@@ -29,7 +29,6 @@ void PineTree::draw(){
     glColor3fv(color);
 
     glBegin(GL_TRIANGLE_FAN);
-        glVertex3f();
 
     glEnd();
 

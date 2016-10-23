@@ -4,7 +4,8 @@
 //abaixo é um construtor.
 CubeScenerio::CubeScenerio()
 {
-    
+
+
 }
 
 void CubeScenerio::draw(){
@@ -21,10 +22,11 @@ void CubeScenerio::draw(){
     glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
 
     glEnable(GL_LIGHTING);
-    glColor3fv(color);
+
+    glColor3f(0, 0.8 ,0);
 
     glBegin(GL_QUADS);			// Face posterior
-        glNormal3f(0.0, 0.0, 1.0);	// Normal da face
+        glNormal3f(0.0, 0.0, -1.0);	// Normal da face
         glVertex3f(40.0, 40.0, 40.0);
         glVertex3f(-40.0, 40.0, 40.0);
         glVertex3f(-40.0, -40.0, 40.0);
@@ -33,7 +35,7 @@ void CubeScenerio::draw(){
 
 
     glBegin(GL_QUADS);			// Face frontal
-        glNormal3f(0.0, 0.0, -1.0); 	// Normal da face
+        glNormal3f(0.0, 0.0, 1.0); 	// Normal da face
         glVertex3f(40.0, 40.0, -40.0);
         glVertex3f(40.0, -40.0, -40.0);
         glVertex3f(-40.0, -40.0, -40.0);
@@ -41,7 +43,7 @@ void CubeScenerio::draw(){
     glEnd();
     
     glBegin(GL_QUADS);			// Face lateral esquerda
-        glNormal3f(-1.0, 0.0, 0.0); 	// Normal da face
+        glNormal3f(1.0, 0.0, 0.0); 	// Normal da face
         glVertex3f(-40.0, 40.0, 40.0);
         glVertex3f(-40.0, 40.0, -40.0);
         glVertex3f(-40.0, -40.0, -40.0);
@@ -49,7 +51,7 @@ void CubeScenerio::draw(){
     glEnd();
     
     glBegin(GL_QUADS);			// Face lateral direita
-        glNormal3f(1.0, 0.0, 0.0);	// Normal da face
+        glNormal3f(-1.0, 0.0, 0.0);	// Normal da face
         glVertex3f(40.0, 40.0, 40.0);
         glVertex3f(40.0, -40.0, 40.0);
         glVertex3f(40.0, -40.0, -40.0);
@@ -57,7 +59,7 @@ void CubeScenerio::draw(){
     glEnd();
     
     glBegin(GL_QUADS);			// Face superior
-        glNormal3f(0.0, 1.0, 0.0);  	// Normal da face
+        glNormal3f(0.0, -1.0, 0.0);  	// Normal da face
         glVertex3f(-40.0, 40.0, -40.0);
         glVertex3f(-40.0, 40.0, 40.0);
         glVertex3f(40.0, 40.0, 40.0);
@@ -65,7 +67,7 @@ void CubeScenerio::draw(){
     glEnd();
     
     glBegin(GL_QUADS);			// Face inferior
-        glNormal3f(0.0, -1.0, 0.0); 	// Normal da face
+        glNormal3f(0.0, 1.0, 0.0); 	// Normal da face
         glVertex3f(-40.0, -40.0, -40.0);
         glVertex3f(40.0, -40.0, -40.0);
         glVertex3f(40.0, -40.0, 40.0);
