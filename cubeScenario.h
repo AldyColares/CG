@@ -15,6 +15,7 @@ private:
     GLfloat const red[3] = {0.8,0,0};
     GLfloat const green[3] = {0,0.8,0};
     GLfloat const blue[3] = {0,0,0.8};
+    float sizecube;
 
 };
 

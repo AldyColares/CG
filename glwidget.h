@@ -12,17 +12,22 @@ public:
 
     void initializeGL();
     void paintGL();
-    void resize(int w, int h);
+    void resizeGL(int w, int h);
+    void setWidth(int w);
+    void setHeight(int h);
 
 
 private:
     void setOrthoSize(int size);
+    void setAngleX(int alpha);
+    void setAngleY(int alpha);
     float
         orthoSize,
         width,
         height,
         angleX,
         angleY,
+        angleZ,
         zoom;
         CubeScenerio cubeScenerio;
 

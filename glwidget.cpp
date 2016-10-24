@@ -5,29 +5,21 @@
 GLWidget::GLWidget(QWidget *parent) :
     QGLWidget(parent)
 {
-    double size = 2;
-
-    Red = 0.5;
-    Green = 0.5;
-    Blue = 0.5;
 
     zoom = 1;
-    setOrthoSize((int)1);
-
-
+    setOrthoSize((int)10);
 
 }
 
 void GLWidget::initializeGL()
 {
-    GLfloat intensity = 1;
-    GLfloat distance = orthoSize;
+    GLfloat intensity = 0.5;
 
 
     GLfloat light_spec[] = {intensity, intensity, intensity, 1.0f};
     GLfloat light_dif[] = {intensity, intensity, intensity, 1.0f};
     GLfloat light_amb[] = {intensity/4, intensity/4, intensity/4, 1.0f};
-    GLfloat light_position[] = { 0, 20, 10, 1 };
+    GLfloat light_position[] = { 0.0, 0.0, 0.0, 1.0 };
 
     glLightfv(GL_LIGHT0, GL_SPECULAR, light_spec);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, light_dif);
@@ -36,7 +28,9 @@ void GLWidget::initializeGL()
 
     glShadeModel (GL_SMOOTH);
 
-    glClearColor(0.2f,0.2f,0.2f,1.0f);
+    glClearColor(0.1f,0.1f,0.1f,1.0f);
+
+    glEnable(GL_CULL_FACE);
 
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LINE_SMOOTH);
@@ -47,16 +41,6 @@ void GLWidget::initializeGL()
     // O método para escolher o tipo de shade que vai ser usado.
     //https://www.opengl.org/sdk/docs/man2/xhtml/glShadeModel.xml
 
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-
-    glOrtho(-orthoSize*zoom   ,orthoSize*zoom,  // left, right
-            -orthoSize*zoom   ,orthoSize*zoom,  // bottom, up
-            -orthoSize*zoom ,orthoSize*zoom*10); // near, far
-
-    glMatrixMode(GL_MODELVIEW);
-
-
 }
 
 
@@ -64,31 +48,66 @@ void GLWidget::initializeGL()
 void GLWidget::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    glPushMatrix();
+    // valores em graus
+    angleX = -45;
+    angleY = 45;
+    angleZ = 0;
 
     glLoadIdentity();
-    glViewport(0, 0, width, height);
+    glTranslatef(0.0, 0.0, -10.0);
+    glRotatef(angleX , 1.0, 0.0, 0.0);
+    glRotatef(angleY , 0.0, 1.0, 0.0);
+    glRotatef(angleZ , 0.0, 0.0, 1.0);
     cubeScenerio.draw();
 
-    glPopMatrix();
 
-    float const aspectRatio = height/width;
-
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-
-    //http://stackoverflow.com/questions/2571402/explain-the-usage-of-glortho
-    glOrtho(-orthoSize*zoom             ,orthoSize*zoom,  // left, right
-            -orthoSize*zoom*aspectRatio ,orthoSize*zoom*aspectRatio,  // bottom, up
-            -orthoSize*zoom*5           ,orthoSize*zoom*5); // near, far
-    glMatrixMode(GL_MODELVIEW);
 
 }
 
-void GLWidget::resize(int w, int h)
+void GLWidget::resizeGL(int width, int height)
 {
+    int side = qMin(width, height);
+    glViewport((width - side) / 2, (height - side) / 2, side, side);
 
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(-8, +8, -8, +8, 1.0, 80.0);
+    glMatrixMode(GL_MODELVIEW);
+
+
+    //setWidth(w);
+    //setHeight(h);
+
+}
+
+void GLWidget::setWidth(int w)
+{
+    if (w > 0){
+        width = w;
+    }else{
+         throw "Tamanho da largura da tela é menor ou igual a zero: GLWidget::GLWidget";
+    }
+}
+
+void GLWidget::setHeight(int h)
+{
+    if (h > 0){
+        height = h;
+    }else{
+        throw "Tamanho da altura da é menor ou igual a zero: GLWidget::GLWidget";
+    }
+}
+
+void GLWidget::setAngleX(int alpha)
+{
+    angleX = alpha;
+    updateGL();
+}
+
+void GLWidget::setAngleY(int alpha)
+{
+    angleY = alpha;
+    updateGL();
 }
 
 
