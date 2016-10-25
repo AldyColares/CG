@@ -1,13 +1,21 @@
 #include "glwidget.h"
 #include <exception>
+#include <iostream>
+#include <QKeyEvent>
+
+
+
+
 
 
 GLWidget::GLWidget(QWidget *parent) :
     QGLWidget(parent)
 {
-
+    unitmove = 0.5;
     zoom = 1;
-    setOrthoSize((int)10);
+
+    setFocus();
+
 
 }
 
@@ -19,7 +27,7 @@ void GLWidget::initializeGL()
     GLfloat light_spec[] = {intensity, intensity, intensity, 1.0f};
     GLfloat light_dif[] = {intensity, intensity, intensity, 1.0f};
     GLfloat light_amb[] = {intensity/4, intensity/4, intensity/4, 1.0f};
-    GLfloat light_position[] = { 0.0, 0.0, 0.0, 1.0 };
+    GLfloat light_position[] = { 0.0, 0.0, 10.0, 1.0 };
 
     glLightfv(GL_LIGHT0, GL_SPECULAR, light_spec);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, light_dif);
@@ -30,7 +38,7 @@ void GLWidget::initializeGL()
 
     glClearColor(0.1f,0.1f,0.1f,1.0f);
 
-    glEnable(GL_CULL_FACE);
+    //glEnable(GL_CULL_FACE);
 
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LINE_SMOOTH);
@@ -48,35 +56,84 @@ void GLWidget::initializeGL()
 void GLWidget::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    // valores em graus
-    angleX = -45;
-    angleY = 45;
+
+
+    glMatrixMode(GL_MODELVIEW);
+    angleX = 0;
+    angleY = 0;
     angleZ = 0;
 
     glLoadIdentity();
-    glTranslatef(0.0, 0.0, -10.0);
+    glTranslatef(0.0, 0.0, 0.0);
     glRotatef(angleX , 1.0, 0.0, 0.0);
     glRotatef(angleY , 0.0, 1.0, 0.0);
     glRotatef(angleZ , 0.0, 0.0, 1.0);
+
+            // x   y   z
+    gluLookAt( 0 + left - right, 0,  8 + forward - backward  //eye
+              ,0, 0,  0,  //center
+               0, 1,  0 );//up
+
+    glColor3f(1,0,0);
+
+    glScalef(3,3,3);
     cubeScenerio.draw();
-
-
 
 }
 
 void GLWidget::resizeGL(int width, int height)
 {
-    int side = qMin(width, height);
-    glViewport((width - side) / 2, (height - side) / 2, side, side);
-
+    glViewport(0,0, width, height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(-8, +8, -8, +8, 1.0, 80.0);
-    glMatrixMode(GL_MODELVIEW);
+    gluPerspective( 45.0, (float)width/height, 0.01, 100.0 );
+    updateGL();
+
 
 
     //setWidth(w);
     //setHeight(h);
+
+}
+
+void GLWidget::keyPressEvent(QKeyEvent *event){
+
+    switch (event->key())
+    {
+        case Qt::Key::Key_W:
+            forward = forward + unitmove;
+            updateGL();
+            break;
+
+        case Qt::Key::Key_S:
+            backward = backward + unitmove;
+            updateGL();
+            break;
+
+        case Qt::Key::Key_D:
+            right = right + unitmove;
+            updateGL();
+            break;
+
+        case Qt::Key::Key_A:
+            left = left + unitmove;
+            updateGL();
+            break;
+        case Qt::Key::Key_U:
+        break;
+
+        case Qt::Key::Key_J:
+
+        break;
+        case Qt::Key::Key_H:
+
+        break;
+        case Qt::Key::Key_L:
+
+        break;
+       default:
+        break;
+    }
 
 }
 
@@ -98,26 +155,6 @@ void GLWidget::setHeight(int h)
     }
 }
 
-void GLWidget::setAngleX(int alpha)
-{
-    angleX = alpha;
-    updateGL();
-}
-
-void GLWidget::setAngleY(int alpha)
-{
-    angleY = alpha;
-    updateGL();
-}
 
 
 
-void GLWidget::setOrthoSize(int size){
-
-    if(size > 0){
-        orthoSize = size;
-    }else{
-        throw "Tamanho da projeção é menor ou igual a zero: GLWidget::GLWidget";
-    }
-
-}

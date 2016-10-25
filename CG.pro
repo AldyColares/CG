@@ -25,4 +25,4 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui
 
-LIBS += -glut
+LIBS +=  -lGLU

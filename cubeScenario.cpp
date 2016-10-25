@@ -4,7 +4,7 @@
 //abaixo é um construtor.
 CubeScenerio::CubeScenerio()
 {
-    sizecube = 4.0;
+    sizecube = 1.0;
 
 }
 

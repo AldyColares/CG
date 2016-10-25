@@ -4,6 +4,7 @@
 #include <QGLWidget>
 #include "cubeScenario.h"
 
+
 class GLWidget : public QGLWidget
 {
     Q_OBJECT
@@ -18,11 +19,18 @@ public:
 
 
 private:
-    void setOrthoSize(int size);
-    void setAngleX(int alpha);
-    void setAngleY(int alpha);
+    void keyPressEvent(QKeyEvent* event);
     float
-        orthoSize,
+        dez,
+        forward,
+        backward,
+        unitmove,
+        right,
+        left,
+        upcam,
+        downcam,
+        leftcam,
+        rightcam,
         width,
         height,
         angleX,
