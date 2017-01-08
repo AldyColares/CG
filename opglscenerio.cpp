@@ -28,7 +28,7 @@ void OpGLScenerio::draw(int orderMaterial)
 
         glColor3f(NTHface.red, NTHface.green, NTHface.blue);
 
-        glNormal3f(NTHface.normal.x,NTHface.normal.y,NTHface.normal.z);
+        glNormal3f(NTHface.normal.x, NTHface.normal.y, NTHface.normal.z);
 
         glBegin(GL_TRIANGLES);
 

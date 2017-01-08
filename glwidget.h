@@ -3,6 +3,7 @@
 
 #include <QGLWidget>
 #include "cubeScenario.h"
+#include "opglscenerio.h"
 
 
 class GLWidget : public QGLWidget
@@ -37,6 +38,8 @@ private:
         angleY,
         angleZ,
         zoom;
+        OpGLScenerio* opGLScenerio = new OpGLScenerio();
+
         CubeScenerio cubeScenerio;
 
     QPoint position;

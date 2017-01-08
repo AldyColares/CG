@@ -9,6 +9,8 @@ class OpGLScenerio
 public:
     OpGLScenerio();
     void draw(int orderMaterial);
+
+private:
     propertyMaterial proMat;
 
     Point3D auxPoint;
@@ -17,7 +19,6 @@ public:
     LoadMaterial* loadMaterial =  new LoadMaterial();
     vector<ScenarioObject*> *vectorScenarioObject;
     ScenarioObject* scenarioObject;
-
 };
 
 #endif // OPGLSCENERIO_H
