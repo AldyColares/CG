@@ -3,11 +3,6 @@
 #include <iostream>
 #include <QKeyEvent>
 
-
-
-
-
-
 GLWidget::GLWidget(QWidget *parent) :
     QGLWidget(parent)
 {
@@ -15,19 +10,17 @@ GLWidget::GLWidget(QWidget *parent) :
     zoom = 1;
 
     setFocus();
-
-
 }
 
 void GLWidget::initializeGL()
 {
-    GLfloat intensity = 0.5;
+    GLfloat intensity = 1;
 
 
     GLfloat light_spec[] = {intensity, intensity, intensity, 1.0f};
     GLfloat light_dif[] = {intensity, intensity, intensity, 1.0f};
     GLfloat light_amb[] = {intensity/4, intensity/4, intensity/4, 1.0f};
-    GLfloat light_position[] = { 0.0, 0.0, 10.0, 1.0 };
+    GLfloat light_position[] = { 0.0, 0.0, 0.0, 1.0 };
 
     glLightfv(GL_LIGHT0, GL_SPECULAR, light_spec);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, light_dif);
@@ -69,15 +62,16 @@ void GLWidget::paintGL()
     glRotatef(angleY , 0.0, 1.0, 0.0);
     glRotatef(angleZ , 0.0, 0.0, 1.0);
 
-            // x   y   z
-    gluLookAt( 0 + left - right, 0,  8 + forward - backward  //eye
-              ,0, 0,  0,  //center
-               0, 1,  0 );//up
+    //          x                           y                    z
+    gluLookAt(  0 + (left - right),         0,         -9 + (forward - backward),  //eye
+                0 + ( leftcam - rightcam) + (left - right), (upcam - downcam),  9 + (forward - backward),  //center
+                0,           100,                   0 );//up
 
     glColor3f(1,0,0);
 
-    glScalef(3,3,3);
+    glScalef(5,5,5);
     cubeScenerio.draw();
+    glTranslatef(0.0, 0.0, 0.0);
 
 }
 
@@ -86,10 +80,8 @@ void GLWidget::resizeGL(int width, int height)
     glViewport(0,0, width, height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective( 45.0, (float)width/height, 0.01, 100.0 );
+    gluPerspective( 45.0, (float)width/height, 0.01, 200.0 );
     updateGL();
-
-
 
     //setWidth(w);
     //setHeight(h);
@@ -100,38 +92,44 @@ void GLWidget::keyPressEvent(QKeyEvent *event){
 
     switch (event->key())
     {
-        case Qt::Key::Key_W:
-            forward = forward + unitmove;
-            updateGL();
-            break;
-
-        case Qt::Key::Key_S:
-            backward = backward + unitmove;
-            updateGL();
-            break;
-
-        case Qt::Key::Key_D:
-            right = right + unitmove;
-            updateGL();
-            break;
-
-        case Qt::Key::Key_A:
-            left = left + unitmove;
-            updateGL();
-            break;
-        case Qt::Key::Key_U:
+    case Qt::Key::Key_W:
+        forward += unitmove;
+        updateGL();
         break;
 
-        case Qt::Key::Key_J:
+    case Qt::Key::Key_S:
+        backward += unitmove;
+        updateGL();
+        break;
+
+    case Qt::Key::Key_D:
+        right += unitmove;
+        updateGL();
+        break;
+
+    case Qt::Key::Key_A:
+        left += unitmove;
+        updateGL();
+        break;
+    case Qt::Key::Key_U:
+        upcam += unitmove;
+        updateGL();
+        break;
+
+    case Qt::Key::Key_J:
+        downcam += unitmove;
+        updateGL();
 
         break;
-        case Qt::Key::Key_H:
-
+    case Qt::Key::Key_H:
+        leftcam += unitmove;
+        updateGL();
         break;
-        case Qt::Key::Key_L:
-
+    case Qt::Key::Key_K:
+        rightcam += unitmove;
+        updateGL();
         break;
-       default:
+    default:
         break;
     }
 
@@ -142,7 +140,7 @@ void GLWidget::setWidth(int w)
     if (w > 0){
         width = w;
     }else{
-         throw "Tamanho da largura da tela é menor ou igual a zero: GLWidget::GLWidget";
+        throw "Tamanho da largura da tela é menor ou igual a zero: GLWidget::GLWidget";
     }
 }
 
@@ -154,7 +152,3 @@ void GLWidget::setHeight(int h)
         throw "Tamanho da altura da é menor ou igual a zero: GLWidget::GLWidget";
     }
 }
-
-
-
-

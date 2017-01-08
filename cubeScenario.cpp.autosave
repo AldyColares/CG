@@ -31,7 +31,7 @@ void CubeScenerio::draw(){
         glVertex3f(-sizecube, sizecube, sizecube);
         glVertex3f(-sizecube, -sizecube, sizecube);
         glVertex3f(sizecube, -sizecube, sizecube);
-    glEnd();
+    glEnd();    
 
     glColor3f(0, 0.9 ,0.9);
     glBegin(GL_QUADS);			// Face frontal

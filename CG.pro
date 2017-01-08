@@ -15,13 +15,29 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     glwidget.cpp \
     PineTree.cpp \
-    cubeScenario.cpp
+    cubeScenario.cpp \
+    loadmaterial.cpp \
+    crossproduct.cpp \
+    unitvector.cpp \
+    scenarioobject.cpp \
+    dot.cpp \
+    generatevetor.cpp \
+    opglscenerio.cpp
 
 HEADERS  += mainwindow.h \
     glwidget.h \
-    axis.h \
     PineTree.h \
-    cubeScenario.h
+    cubeScenario.h \
+    loadmaterial.h \
+    crossproduct.h \
+    unitvector.h \
+    scenarioobject.h \
+    dot.h \
+    face3d.h \
+    point3d.h \
+    propertymaterial.h \
+    generatevetor.h \
+    opglscenerio.h
 
 FORMS    += mainwindow.ui
 
