@@ -14,7 +14,6 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     glwidget.cpp \
-    PineTree.cpp \
     cubeScenario.cpp \
     loadmaterial.cpp \
     crossproduct.cpp \
@@ -26,7 +25,6 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h \
     glwidget.h \
-    PineTree.h \
     cubeScenario.h \
     loadmaterial.h \
     crossproduct.h \

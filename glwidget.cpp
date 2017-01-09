@@ -19,7 +19,7 @@ void GLWidget::initializeGL()
     GLfloat light_spec[] = {intensity, intensity, intensity, 1.0f};
     GLfloat light_dif[] = {intensity, intensity, intensity, 1.0f};
     GLfloat light_amb[] = {intensity/4, intensity/4, intensity/4, 1.0f};
-    GLfloat light_position[] = { 0.0, 50.0, 0.0, 1.0 };
+    GLfloat light_position[] = { 0.0, 1.0, -3.0, 1.0 };
 
     glLightfv(GL_LIGHT0, GL_SPECULAR, light_spec);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, light_dif);
@@ -56,27 +56,69 @@ void GLWidget::paintGL()
     angleY = 0;
     angleZ = 0;
     glLoadIdentity();
-
-
-    //glPushMatrix();
-
-    glTranslatef(0.0, -8.0, 0.0);
-    //glRotatef(angleX , 1.0, 0.0, 0.0);
-    //glRotatef(angleY , 0.0, 1.0, 0.0);
-    //glRotatef(angleZ , 0.0, 0.0, 1.0);
+    //          x                           y                    z
     gluLookAt(  0 + (left - right),         0,         -9 + (forward - backward),  //eye
                 0 + ( leftcam - rightcam) + (left - right), (upcam - downcam),  9 + (forward - backward),  //center
                 0,           100,                   0 );//up
+    glPushMatrix();
+
+    //glTranslatef(0.0, -8.0, 0.0);
+    //glRotatef(angleX , 1.0, 0.0, 0.0);
+    //glRotatef(angleY , 0.0, 1.0, 0.0);
+    //glRotatef(angleZ , 0.0, 0.0, 1.0);
+
     glColor3f(1,0,0);
     //glScalef(5,5,5);
     //cubeScenerio.draw();
     opGLScenerio->draw(0);
    // glTranslatef(0.0, 0.0, 0.0);
 
-    //glPopMatrix();
+    glPopMatrix();
 
-    //          x                           y                    z
+    glPushMatrix();
 
+    //glTranslatef(0.0, -8.0, 0.0);
+    //glRotatef(angleX , 1.0, 0.0, 0.0);
+    //glRotatef(angleY , 0.0, 1.0, 0.0);
+    //glRotatef(angleZ , 0.0, 0.0, 1.0);
+
+    glColor3f(1,0,0);
+    //glScalef(5,5,5);
+    //cubeScenerio.draw();
+    opGLScenerio->draw(0);
+   // glTranslatef(0.0, 0.0, 0.0);
+
+    glPopMatrix();
+
+    glPushMatrix();
+
+    //glTranslatef(0.0, -8.0, 0.0);
+    //glRotatef(angleX , 1.0, 0.0, 0.0);
+    //glRotatef(angleY , 0.0, 1.0, 0.0);
+    //glRotatef(angleZ , 0.0, 0.0, 1.0);
+
+    glColor3f(1,0,0);
+    //glScalef(5,5,5);
+    opGLScenerio->draw(1);
+   // glTranslatef(0.0, 0.0, 0.0);
+
+    glPopMatrix();
+/*
+    glPushMatrix();
+
+    //glTranslatef(0.0, -8.0, 0.0);
+    //glRotatef(angleX , 1.0, 0.0, 0.0);
+    //glRotatef(angleY , 0.0, 1.0, 0.0);
+    //glRotatef(angleZ , 0.0, 0.0, 1.0);
+
+    glColor3f(1,0,0);
+    //glScalef(5,5,5);
+    opGLScenerio->draw(2);
+   // glTranslatef(0.0, 0.0, 0.0);
+
+    glPopMatrix();
+
+*/
 
 }
 

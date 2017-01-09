@@ -1,5 +1,5 @@
 #include "cubeScenario.h"
-#include <GL/glu.h>
+//#include <GL/glu.h>
 
 //abaixo é um construtor.
 CubeScenerio::CubeScenerio()
